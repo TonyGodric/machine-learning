@@ -35,6 +35,24 @@ def gradient_descent(bedrooms, area, w1, w2,b, learning_rate, iterations):
         w2 -= (learning_rate * total_error_w2) / n
         b -= (learning_rate * total_error_b) / n
     return w1, w2,b
-# Initialize weights and bias
-w1, w2, b = 0, 0, 0
-# Perform gradient descent
+# Khởi tạo trọng số ban đầu, learning rate và số vòng lặp
+w1 = 0.0
+w2 = 0.0
+b = 0.0
+learning_rate = 0.0001  
+iterations = 1000
+bedrooms_list = X['bedrooms'].tolist()
+area_list = X['area'].tolist()
+price_list = Y.tolist()
+
+# 2. Huấn luyện mô hình tìm w1, w2, b
+w1, w2, b = gradient_descent(bedrooms_list, area_list, w1, w2, b, learning_rate, iterations)
+
+print(f"Trọng số tối ưu: w1 = {w1:.4f}, w2 = {w2:.4f}, b = {b:.4f}")
+
+# 3. Đưa ra dự đoán cho một ngôi nhà mới (Ví dụ: 3 phòng ngủ, diện tích 70m2)
+bedrooms_input = 3
+area_input = 70
+
+predicted = predict_price(bedrooms_input, area_input, w1, w2, b)
+print(f"Dự đoán giá nhà ({bedrooms_input} phòng ngủ, {area_input}m2): {predicted:.2f} tỷ")
