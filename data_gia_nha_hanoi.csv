@@ -1,9 +1,9 @@
-﻿STT,Quan_KhuVuc,So_Phong_Ngu,Dien_Tich_m2,Gia_Trieu_m2,Tong_Gia_Ty_VND
-1,Cau Giay (Nha ngo),2,45,85,3.8
-2,Thanh Xuan (Nha mat pho),3,37,115,4.25
-3,Hai Ba Trung (Nha ngo),4,40,65,2.6
-4,Long Bien (Nha ngo),4,52,93,4.8
-5,Ha Dong (Nha mat pho),5,90,108,9.7
-6,Nam Tu Liem (Nha ngo),3,32,61,1.95
-7,Tay Ho (Can ho chung cu),2,68,55,3.74
-8,Hoang Mai (Can ho chung cu),2,58,42,2.43
+﻿bedrooms,area,price
+2,45,3.8
+3,37,4.25
+4,40,2.6
+4,52,4.8
+5,90,9.7
+3,32,1.95
+2,68,3.74
+2,58,2.43
