@@ -40,7 +40,7 @@ w1 = 0.0
 w2 = 0.0
 b = 0.0
 learning_rate = 0.0001  
-iterations = 1000
+iterations = 20000
 bedrooms_list = X['bedrooms'].tolist()
 area_list = X['area'].tolist()
 price_list = Y.tolist()
@@ -52,7 +52,7 @@ print(f"Trọng số tối ưu: w1 = {w1:.4f}, w2 = {w2:.4f}, b = {b:.4f}")
 
 # 3. Đưa ra dự đoán cho một ngôi nhà mới (Ví dụ: 3 phòng ngủ, diện tích 70m2)
 bedrooms_input = 3
-area_input = 70
+area_input = 100
 
 predicted = predict_price(bedrooms_input, area_input, w1, w2, b)
 print(f"Dự đoán giá nhà ({bedrooms_input} phòng ngủ, {area_input}m2): {predicted:.2f} tỷ")
