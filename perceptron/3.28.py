@@ -1,66 +1,33 @@
-"""3.29 Viết code để xây dựng lớp Perceptron có hàm fit để huấn luyện mô hình và hàm predict để dự báo nhãn của dữ liệu mới."""
+"""3.28 Cho: w=[−2, 1, 0]T, x=[2, 3, 1]T,  y=1, trong đó, x đã thêm bias.
+Sử dụng phương pháp Perceptron:
+1.	Kiểm tra mẫu có bị phân lớp sai hay không. 
+2.	Nếu sai, thực hiện một bước cập nhật Perceptron. 
+3.	Tính lại giá trị wTx sau cập nhật."""
 import numpy as np
-import matplotlib.pyplot as plt
 
-class Perceptron:
-    def __init__(self, learning_rate=0.01, max_iterations=1000):
-        self.learning_rate = learning_rate
-        self.max_iterations = max_iterations
+# Khởi tạo
+w = np.array([-2, 1, 0])  # Dùng mảng 1D cho gọn
+x = np.array([2, 3, 1])
+y = 1
 
-    def fit(self, X, y):
-        # Initialize weights and bias
-        self.weights = np.zeros(X.shape[1])
-        self.bias = 0
+# Bước 1: Tính wTx và dự đoán
+wTx = np.dot(w, x)
+predicted_label = np.sign(wTx)
 
-        # Convert labels to -1 and 1
-        y = np.where(y <= 0, -1, 1)
+print(f"w^T * x = {wTx}")
+print(f"Predicted label = {predicted_label}")
 
-        for _ in range(self.max_iterations):
-            for i in range(X.shape[0]):
-                # Compute prediction
-                linear_output = np.dot(X[i], self.weights) + self.bias
-                prediction = np.sign(linear_output)
-
-                # Update weights and bias if misclassified
-                if prediction != y[i]:
-                    self.weights += self.learning_rate * y[i] * X[i]
-                    self.bias += self.learning_rate * y[i]
-
-    def predict(self, X):
-        linear_output = np.dot(X, self.weights) + self.bias
-        return np.sign(linear_output)
-
-def draw_line(weights, bias):
-    if weights[1] != 0:
-        x_vals = np.array([-10, 10])
-        y_vals = -(weights[0] * x_vals + bias) / weights[1]
-        plt.plot(x_vals, y_vals, 'k-')
-    else:
-        x_val = -bias / weights[0]
-        plt.axvline(x=x_val, color='k')
-def main():
-    # Sample data
-    X = np.array([[2, 2], [4, 2], [4, 4], [2, 4]])
-    y = np.array([1, 1, -1, -1])  # Labels
-
-    # Create and train Perceptron
-    perceptron = Perceptron(learning_rate=0.1, max_iterations=10)
-    perceptron.fit(X, y)
-
-    # Predict on training data
-    predictions = perceptron.predict(X)
-    print("Predictions:", predictions)
-
-    # Plotting
-    plt.scatter(X[:, 0], X[:, 1], c=y, cmap='bwr', edgecolors='k')
-    draw_line(perceptron.weights, perceptron.bias)
-    plt.xlim(0, 5)
-    plt.ylim(0, 5)
-    plt.title("Perceptron Decision Boundary")
-    plt.xlabel("Feature 1")
-    plt.ylabel("Feature 2")
-    plt.grid()
-    plt.show()
-if __name__ == "__main__":
-    main()
+# Bước 2: Kiểm tra và cập nhật
+if predicted_label != y:
+    print(f"Mẫu bị phân lớp sai (y={y}, dự đoán={predicted_label})")
+    learning_rate = 1.0
+    # Cập nhật theo công thức (y - y_hat)
+    update = learning_rate * (y - predicted_label)
+    w = w + update * x
+    print(f"Trọng số sau cập nhật: {w}")
     
+    # Bước 3: Tính lại wTx
+    wTx_new = np.dot(w, x)
+    print(f"w^T * x sau cập nhật = {wTx_new}")
+else:
+    print("Mẫu được phân lớp đúng, không cần cập nhật.")
